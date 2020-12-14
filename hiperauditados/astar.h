@@ -1,7 +1,6 @@
 #ifndef ASTAR_H
 #define ASTAR_H
 
-#include "astar.h"
 #include "commonTypes.h"
 #include <map>
 #include <math.h>
