@@ -11,7 +11,7 @@ void relax(std::vector<std::vector<int>> &dists, int &from, int &middle, int &to
 }
 
 // O(v^3)
-std::vector<std::vector<int>> floydwarshall(const incidences &edgeList, const int &nodes, const int &edges)
+std::vector<std::vector<int>> floydwarshall(const incidences &edgeList, const int &nodes, const int&)
 {
     std::vector<std::vector<int>> distances(nodes, std::vector<int>(nodes, INF));
 

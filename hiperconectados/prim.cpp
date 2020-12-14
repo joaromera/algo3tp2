@@ -14,7 +14,7 @@ int prim(adjacencies edgeList, int v, int e) {
 
     //Initializing data
     for (size_t i = 0; i < v; i++) { //O(v)
-        visited.push_back(-1);
+        visited.emplace_back(-1);
     }
     visited[0] = 0;
     int current = 0;

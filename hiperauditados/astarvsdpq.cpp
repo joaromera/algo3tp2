@@ -35,13 +35,13 @@ int main(int argc, char * argv[]) {
             int x;
             int y;
             cin >> x >> y;
-            nodesPosition.push_back(make_tuple(x,y));
+            nodesPosition.emplace_back(x,y);
         }
 
         for (size_t i = 0; i < edges; i++) {
             int edgeA, edgeB, weight;
             cin >> edgeA >> edgeB >> weight;
-            edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+            edgeList.emplace_back(edgeA, edgeB, weight);
         }
     }
 
@@ -112,7 +112,7 @@ vector < edge > hiperauditados (
             for (int from = 0; from < nodes - 1; from++) {
                 for (int goal = from + 1; goal < nodes; goal++) {
                     int distance = dijkstrapq(adjList, nodesPosition, edges, from, goal);
-                    results.push_back(make_tuple(from,goal,distance));
+                    results.emplace_back(from,goal,distance);
                     // cout << from << " " << goal << " " << distance << endl;
                 }   
             }
@@ -121,7 +121,7 @@ vector < edge > hiperauditados (
             for (int from = 0; from < nodes - 1; from++) {
                 for (int goal = from + 1; goal < nodes; goal++) {
                     int distance = astar(adjList, nodesPosition, edges, from, goal);
-                    results.push_back(make_tuple(from,goal,distance));
+                    results.emplace_back(from,goal,distance);
                     // cout << from << " " << goal << " " << distance << endl;
                 }
             }
@@ -147,13 +147,13 @@ void getProblemFromFile (
         int x;
         int y;
         ifs >> x >> y;
-        nodesPosition.push_back(make_tuple(x,y));
+        nodesPosition.emplace_back(x,y);
     }
 
     for (size_t i = 0; i < edges; i++) {
         int edgeA, edgeB, weight;
         ifs >> edgeA >> edgeB >> weight;
-        edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+        edgeList.emplace_back(edgeA, edgeB, weight);
     }
 
     ifs.close();
@@ -172,18 +172,18 @@ adjacencies incToAdj(const incidences &edgeList, const int &v, const int &e) {
     // Agrego los adyacentes y los pesos a cada nodo
     for (int h = 0; h < e; h++) {
         edge e = edgeList[h];
-        adjList[get <0> (e)].push_back(make_tuple(get <1> (e), get <2> (e)));
+        adjList[get <0> (e)].emplace_back(get <1> (e), get <2> (e));
     }
     return adjList;
 }
 
 // O(v) + O(e * log(e)) + O(v * d(v) * log(e))
-int astar(const adjacencies &adjList, const vector <std::tuple<int,int> > &nodesPosition, const int &edges, const int &from, const int &goal) {    
+int astar(const adjacencies &adjList, const vector <std::tuple<int,int> > &nodesPosition, const int&, const int &from, const int &goal) {    
     vector<int> solution (nodesPosition.size(), INF);
     solution[from] = 0;
 
     priority_Queue_A queue;
-    queue.push(make_tuple(from,0,0));
+    queue.emplace(from,0,0);
 
     int goal_x = get<0>(nodesPosition[goal]);
     int goal_y = get<1>(nodesPosition[goal]);
@@ -209,7 +209,7 @@ int astar(const adjacencies &adjList, const vector <std::tuple<int,int> > &nodes
                 int dst_y = goal_y - y;
                 int priority = sqrt(pow(dst_x,2) + pow(dst_y,2));
                 
-                queue.push(make_tuple(get<0>(adj), new_cost, priority));
+                queue.emplace(get<0>(adj), new_cost, priority);
             }
         }
     }
@@ -217,12 +217,12 @@ int astar(const adjacencies &adjList, const vector <std::tuple<int,int> > &nodes
 }
 
 // O(v) + O(e * log(e)) + O(v * d(v) * log(e))
-int dijkstrapq(const adjacencies &adjList, const vector <std::tuple<int,int> > &nodesPosition, const int &edges, const int &from, const int &goal) {    
+int dijkstrapq(const adjacencies &adjList, const vector <std::tuple<int,int> > &nodesPosition, const int&, const int &from, const int &goal) {    
     vector<int> solution (nodesPosition.size(), INF);
     solution[from] = 0;
 
     priority_Queue queue;
-    queue.push(make_tuple(from,0));
+    queue.emplace(from,0);
 
     while (!queue.empty()) {
         tuple<int,int> node = queue.top(); queue.pop();
@@ -237,7 +237,7 @@ int dijkstrapq(const adjacencies &adjList, const vector <std::tuple<int,int> > &
             // Relajo las distancias
             if (solution[get<0>(adj)] > solution[get<0>(node)] + get<1>(adj)) {
                 solution[get<0>(adj)] = solution[get<0>(node)] + get<1>(adj);
-                queue.push(make_tuple(get<0>(adj), solution[get<0>(adj)]));
+                queue.emplace(get<0>(adj), solution[get<0>(adj)]);
             }
         }
     }

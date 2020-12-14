@@ -3,7 +3,7 @@
 #include "commonTypes.h"
 
 // O(v^2 + e)
-std::vector<int> dijkstra(const adjacencies &adjList, const int nodes, const int edges, const int from)
+std::vector<int> dijkstra(const adjacencies &adjList, const int nodes, const int, const int from)
 {
     std::vector<bool> visited(nodes, false);
     visited[from] = true;

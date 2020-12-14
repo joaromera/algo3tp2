@@ -198,7 +198,7 @@ vector < edge > hiperauditados (
     const incidences & edgeList,
     const int & states,
     const int & nodes,
-    const int & edges) {
+    const int&) {
     
     // Crear grafo de estados a partir del original 
     incidences stateGraph = graphToStateGraph(litrebycity, edgeList, states);               //O(e)

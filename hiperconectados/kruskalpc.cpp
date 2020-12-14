@@ -9,8 +9,8 @@ class DSU {
     public:
         DSU(int n) {
             for (size_t i = 0; i < n; i++) {
-                parent.push_back(i);
-                height.push_back(1);
+                parent.emplace_back(i);
+                height.emplace_back(1);
             }
         };
 
