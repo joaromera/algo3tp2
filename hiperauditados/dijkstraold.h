@@ -3,7 +3,7 @@
 #include "commonTypes.h"
 
 //O(v^2 * e)
-std::vector<int> dijkstraOld(const incidences &edgeList, const int nodes, const int, const int from)
+std::vector<int> dijkstraOld(const incidences &edgeList, const int nodes, const int from)
 {
     std::vector<int> visited(nodes, -1);
     visited[from] = 0;

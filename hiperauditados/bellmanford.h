@@ -3,7 +3,7 @@
 #include "commonTypes.h"
 
 //O(ve)
-std::vector<int> bellmanford(const incidences &edgeList, const int nodes, const int, const int from)
+std::vector<int> bellmanford(const incidences &edgeList, const int nodes, const int from)
 {
     std::vector<int> solution(nodes, INF);
     solution[from] = 0;

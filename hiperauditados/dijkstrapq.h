@@ -3,7 +3,7 @@
 #include "commonTypes.h"
 
 // O(v) + O(e * log(e))
-std::vector<int> dijkstrapq(const adjacencies &adjList, const int nodes, const int, const int from)
+std::vector<int> dijkstrapq(const adjacencies &adjList, const int nodes, const int from)
 {
     std::vector<int> solution(nodes, INF);
     solution[from] = 0;

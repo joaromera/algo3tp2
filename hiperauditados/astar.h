@@ -3,7 +3,7 @@
 #include "commonTypes.h"
 
 // O(v) + O(e * log(e)) + O(v * d(v) * log(e)) [Same as Dijkstra PQ]
-std::vector<int> astar(const adjacencies &adjList, const int nodes, const int, const int from)
+std::vector<int> astar(const adjacencies &adjList, const int nodes, const int from)
 {
     std::vector<int> solution(nodes, INF);
     solution[from] = 0;

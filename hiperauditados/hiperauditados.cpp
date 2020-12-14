@@ -219,7 +219,7 @@ vector < edge > hiperauditados (
             // O(v^3 * e + v^2)
             // O(v^3 * e)
             for (int i = from; i < nodesWithStates - 1; i += states) {                      // O(v)
-                distances = dijkstraOld(stateGraph, nodesWithStates, edgesWithStates, i);       // O(v^2 * e)
+                distances = dijkstraOld(stateGraph, nodesWithStates, i);       // O(v^2 * e)
                 printSolution(distances, i, nodesWithStates, states, results);                  // O(v)
             }
             break;
@@ -229,7 +229,7 @@ vector < edge > hiperauditados (
             // O(v^3)
             adjList = incToAdj(stateGraph, nodesWithStates, edgesWithStates);               // O(v+e)
             for (int i = from; i < nodesWithStates - 1; i += states) {                      // O(v)
-                distances = dijkstra(adjList, nodesWithStates, edgesWithStates, i);             // O(v^2 + e)
+                distances = dijkstra(adjList, nodesWithStates, i);             // O(v^2 + e)
 				printSolution(distances, i, nodesWithStates, states, results);                  // O(v)
             }
             break;
@@ -240,7 +240,7 @@ vector < edge > hiperauditados (
             //O(v^2 + v * e * log(e))
             adjList = incToAdj(stateGraph, nodesWithStates, edgesWithStates);               // O(v+e)
             for (int i = from; i < nodesWithStates - 1; i += states) {                      // O(v)
-                distances = dijkstrapq(adjList, nodesWithStates, edgesWithStates, i);           // O(v) + O(e * log(e))
+                distances = dijkstrapq(adjList, nodesWithStates, i);           // O(v) + O(e * log(e))
                 printSolution(distances, i, nodesWithStates, states, results);                  // O(v)
             }
             break;
@@ -251,7 +251,7 @@ vector < edge > hiperauditados (
             //O(v^2 + v * e * log(e))
             adjList = incToAdj(stateGraph, nodesWithStates, edgesWithStates);               // O(v+e)
             for (int i = from; i < nodesWithStates - 1; i += states) {                      // O(v)
-                distances = astar(adjList, nodesWithStates, edgesWithStates, i);                // O(v) + O(e * log(e))
+                distances = astar(adjList, nodesWithStates, i);                // O(v) + O(e * log(e))
                 printSolution(distances, i, nodesWithStates, states, results);                  // O(v)
             }
             break;
@@ -260,20 +260,20 @@ vector < edge > hiperauditados (
             //O(v^2 * e + v^2)
             //O(v^3)
             for (int i = from; i < nodesWithStates - 1; i += states) {                      // O(v)
-                distances = bellmanford(stateGraph, nodesWithStates, edgesWithStates, i);       // O (ve)
+                distances = bellmanford(stateGraph, nodesWithStates, i);       // O (ve)
                 printSolution(distances, i, nodesWithStates, states, results);                  // O (v)
             }
             break;
         case FloydWarshall:
             //O(v^3 + v^2)
             //O(v^3)
-            matrix = floydwarshall(stateGraph, nodesWithStates, edgesWithStates);           // O(v^3)
+            matrix = floydwarshall(stateGraph, nodesWithStates);           // O(v^3)
             results = printSolution(matrix, from, nodesWithStates, states);                 // O(v^2)
             break;
         case Dantzig:
             //O(v^3 + v^2)
             //O(v^3)
-            matrix = dantzig(stateGraph, nodesWithStates, edgesWithStates);                 // O(v^3)
+            matrix = dantzig(stateGraph, nodesWithStates);                 // O(v^3)
             results = printSolution(matrix, from, nodesWithStates, states);                 // O(v^2)
             break;
     }
