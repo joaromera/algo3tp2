@@ -14,7 +14,7 @@ generator: generator.o
 euclideangraphs: euclideangraphs.o
 	$(CXX) $(STDFLAGS) $^ -o euclideangraphs
 
-hiperauditados: hiperauditados.o dijkstraold.o dijkstra.o dijkstrapq.o bellmanford.o floydwarshall.o dantzig.o
+hiperauditados: hiperauditados.o dijkstraold.o dijkstra.o dijkstrapq.o floydwarshall.o
 	$(CXX) $(STDFLAGS) $^ -o hiperauditados
 
 astarvsdpq: astarvsdpq.o dijkstrapq.o
