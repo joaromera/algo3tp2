@@ -3,12 +3,13 @@
 #include <algorithm>
 #include <chrono>
 #include <iostream>
+#include <limits>
 #include <queue>
 #include <set>
 #include <tuple>
 #include <vector>
 
-const int INF = 6000000;
+const int INF = std::numeric_limits<int>::max();
 
 //Incidences List
 using edge = std::tuple<int, int, int>;

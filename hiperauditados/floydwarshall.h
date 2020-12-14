@@ -2,12 +2,16 @@
 
 #include "commonTypes.h"
 
+namespace FloydWarshall_NS {
+
 void relax(std::vector<std::vector<int>> &dists, int &from, int &middle, int &to)
 {
     if (dists[from][to] > dists[from][middle] + dists[middle][to])
     {
         dists[from][to] = dists[from][middle] + dists[middle][to];
     }
+}
+
 }
 
 // O(v^3)
@@ -38,7 +42,7 @@ std::vector<std::vector<int>> floydwarshall(const incidences &edgeList, const in
                 {
                     if (j != k && j != i)
                     {
-                        relax(distances, i, k, j);
+                        FloydWarshall_NS::relax(distances, i, k, j);
                     }
                 }
             }

@@ -2,12 +2,16 @@
 
 #include "commonTypes.h"
 
+namespace Dantzig_NS {
+
 void relax(std::vector<std::vector<int>> &dists, int from, int middle, int to)
 {
     if (dists[from][to] > dists[from][middle] + dists[middle][to])
     {
         dists[from][to] = dists[from][middle] + dists[middle][to];
     }
+}
+
 }
 
 // O(v^3)
@@ -35,8 +39,8 @@ std::vector<std::vector<int>> dantzig(const incidences &edgeList, const int node
         {
             for (int j = 0; j <= k; ++j)
             {
-                relax(distances, i, j, k + 1);
-                relax(distances, k + 1, j, i);
+                Dantzig_NS::relax(distances, i, j, k + 1);
+                Dantzig_NS::relax(distances, k + 1, j, i);
             }
         }
         // Tercer y cuarto loop de Dantzig
@@ -44,7 +48,7 @@ std::vector<std::vector<int>> dantzig(const incidences &edgeList, const int node
         {
             for (int j = 0; j <= k; ++j)
             {
-                relax(distances, i, k + 1, j);
+                Dantzig_NS::relax(distances, i, k + 1, j);
             }
         }
     }

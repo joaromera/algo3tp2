@@ -1,15 +1,16 @@
 #ifndef COMMONTYPES_H
 #define COMMONTYPES_H
 
-#include <vector>
-#include <tuple>
-#include <queue>
-#include <iostream>
 #include <algorithm>
-#include <set>
 #include <chrono>
+#include <iostream>
+#include <limits>
+#include <queue>
+#include <set>
+#include <tuple>
+#include <vector>
 
-const int INF = 6000000;
+const int INF = std::numeric_limits<int>::max();
 
 //Incidences List
 typedef std::tuple < int, int, int > edge;
