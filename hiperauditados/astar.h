@@ -1,9 +1,6 @@
-#ifndef ASTAR_H
-#define ASTAR_H
+#pragma once
 
 #include "commonTypes.h"
-#include <map>
-#include <math.h>
 
 // O(v) + O(e * log(e)) + O(v * d(v) * log(e)) [Same as Dijkstra PQ]
 std::vector<int> astar(const adjacencies &adjList, const int nodes, const int edges, const int from)
@@ -38,5 +35,3 @@ std::vector<int> astar(const adjacencies &adjList, const int nodes, const int ed
     }
     return solution;
 }
-
-#endif
