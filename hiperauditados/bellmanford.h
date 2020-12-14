@@ -1,8 +1,28 @@
-#ifndef BELLMANFORD_H
-#define BELLMANFORD_H
+#pragma once
 
 #include "commonTypes.h"
 
-std::vector<int> bellmanford(const incidences &edgeList, const int &nodes, const int &edges, const int &from);
+//O(ve)
+std::vector<int> bellmanford(const incidences &edgeList, const int nodes, const int edges, const int from)
+{
+    std::vector<int> solution(nodes, INF);
+    solution[from] = 0;
 
-#endif
+    for (size_t v = 0; v < nodes; ++v)
+    {
+        for (const auto &e : edgeList)
+        {
+            const int src = std::get<0>(e);
+            const int dst = std::get<1>(e);
+            const int cst = std::get<2>(e);
+
+            // Relax distance
+            if (solution[src] != INF && solution[src] + cst < solution[dst])
+            {
+                solution[dst] = solution[src] + cst;
+            }
+        }
+    }
+
+    return solution;
+}
