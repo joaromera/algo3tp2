@@ -9,7 +9,7 @@ std::vector<int> astar(const adjacencies &adjList, const int nodes, const int ed
     solution[from] = 0;
 
     priority_Queue_A queue;
-    queue.push(std::make_tuple(from, 0, 0));
+    queue.emplace(from, 0, 0);
 
     while (!queue.empty())
     {
@@ -29,7 +29,7 @@ std::vector<int> astar(const adjacencies &adjList, const int nodes, const int ed
                 //o sea, es igual a Dijkstra PQ.
                 solution[std::get<0>(adj)] = new_cost;
                 const int priority = new_cost;
-                queue.push(std::make_tuple(std::get<0>(adj), new_cost, priority));
+                queue.emplace(std::get<0>(adj), new_cost, priority);
             }
         }
     }

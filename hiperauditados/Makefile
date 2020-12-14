@@ -14,10 +14,10 @@ generator: generator.o
 euclideangraphs: euclideangraphs.o
 	$(CXX) $(STDFLAGS) $^ -o euclideangraphs
 
-hiperauditados: hiperauditados.o dijkstrapq.o floydwarshall.o
+hiperauditados: hiperauditados.o floydwarshall.o
 	$(CXX) $(STDFLAGS) $^ -o hiperauditados
 
-astarvsdpq: astarvsdpq.o dijkstrapq.o
+astarvsdpq: astarvsdpq.o
 	$(CXX) $(STDFLAGS) $^ -o astarvsdpq
 
 %.o: %.cpp
