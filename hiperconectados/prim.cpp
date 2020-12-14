@@ -28,8 +28,7 @@ int prim(adjacencies edgeList, int v, int e) {
         //Add neighbours to the queue O(d(vi)*log(v))
         for (int j = 0; j < adjacents.size(); j++) { //O(d(vi))
             if (visited[get <0> (adjacents[j])] == -1) {  
-                edge adyacente = make_tuple(current, get <0> (adjacents[j]), get <1> (adjacents[j]));
-                queue.push(adyacente); //O(log(v))
+                queue.emplace(current, get <0> (adjacents[j]), get <1> (adjacents[j]));
             }
         }
 

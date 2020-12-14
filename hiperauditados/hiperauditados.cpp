@@ -91,13 +91,13 @@ int main(int argc, char * argv[]) {
         for (size_t i = 0; i < nodes; i++) {
             int litrecost;
             cin >> litrecost;
-            litrebycity.push_back(litrecost);
+            litrebycity.emplace_back(litrecost);
         }
 
         for (size_t i = 0; i < edges; i++) {
             int edgeA, edgeB, weight;
             cin >> edgeA >> edgeB >> weight;
-            edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+            edgeList.emplace_back(edgeA, edgeB, weight);
         }
     }
 
@@ -290,7 +290,7 @@ incidences getGraphFromFile (const string & fileName, const int & edges) {
     for (size_t i = 0; i < edges; i++) {
         int edgeA, edgeB, weight;
         ifs >> edgeA >> edgeB >> weight;
-        edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+        edgeList.emplace_back(edgeA, edgeB, weight);
     }
 
     ifs.close();
@@ -312,13 +312,13 @@ void getProblemFromFile (
     for (size_t i = 0; i < nodes; i++) {
         int cost_in_city_i;
         ifs >> cost_in_city_i;
-        litrebycity.push_back(cost_in_city_i);
+        litrebycity.emplace_back(cost_in_city_i);
     }
 
     for (size_t i = 0; i < edges; i++) {
         int edgeA, edgeB, weight;
         ifs >> edgeA >> edgeB >> weight;
-        edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+        edgeList.emplace_back(edgeA, edgeB, weight);
     }
 
     ifs.close();
@@ -334,15 +334,15 @@ incidences graphToStateGraph (
     for (size_t i = 1; i < states; i++) {
         int j = i-1;
 		for (size_t k = 0; k < litrebycity.size(); k++) {
-			stateGraph.push_back(make_tuple(j + states * k, i + states * k, litrebycity[k]));
+			stateGraph.emplace_back(j + states * k, i + states * k, litrebycity[k]);
 		}
 		for (auto e : edgeList) {
 			int nodeA = get<0>(e);
 			int nodeB = get<1>(e);
 			int weight = get<2>(e);
 			if (i >= weight) {
-                stateGraph.push_back(make_tuple(i + nodeA * states, i - weight + nodeB * states, 0));
-                stateGraph.push_back(make_tuple(i + nodeB * states, i - weight + nodeA * states, 0));
+                stateGraph.emplace_back(i + nodeA * states, i - weight + nodeB * states, 0);
+                stateGraph.emplace_back(i + nodeB * states, i - weight + nodeA * states, 0);
             }
         }
     }
@@ -365,8 +365,7 @@ vector < edge > printSolution (
                     min = matrix[i][k];
                 }
             }
-            edge edge = make_tuple(i / states, j / states, min);
-            results.push_back(edge);
+            results.emplace_back(i / states, j / states, min);
         }
     }
     
@@ -379,13 +378,10 @@ void printSolution (
     const int & nodesWithStates, 
     const int & states,
     vector < edge > & results) {
-    
-    edge edge;
-    
+
     for (int j = from + states; j < nodesWithStates; j += states) {                         // O(v)
         int min = * min_element(distances.begin() + j - states, distances.begin() + j);     // O(60)
-        edge = make_tuple(from / states, j / states, min);
-        results.push_back(edge);
+        results.emplace_back(from / states, j / states, min);
     }
 }
 
@@ -403,7 +399,7 @@ adjacencies incToAdj(const incidences &edgeList, const int &v, const int &e) {
     // Agrego los adyacentes y los pesos a cada nodo
     for (int h = 0; h < e; h++) {                                               // O(e)
         edge e = edgeList[h];
-        adjList[get <0> (e)].push_back(make_tuple(get <1> (e), get <2> (e)));
+        adjList[get <0> (e)].emplace_back(get <1> (e), get <2> (e));
     }
     return adjList;
 }

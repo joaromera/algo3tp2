@@ -38,10 +38,10 @@ void euclideanGraphs(const int &v, const int &e) {
     int x = 0;
     int y = 0;
     matrix[x][y] = 1;
-    nodesPosition[0] = make_tuple(x,y);
+    nodesPosition[0] = { x, y };
     vector<int> chosensofar;
-    chosensofar.push_back(0);
-    nodesList.push_back(make_tuple(0,0));
+    chosensofar.emplace_back(0);
+    nodesList.emplace_back(0,0);
 
     // Asigno nodos a posiciones y las guardo
     int w,s,x_dist,y_dist,ws_dist;
@@ -57,9 +57,9 @@ void euclideanGraphs(const int &v, const int &e) {
             ws_dist = sqrt(pow(x_dist,2) + pow(y_dist,2));
         } while (x >= 42 || x < 0 || y < 0 || y >= 42 || ws_dist > 60 || matrix[x][y] != 0);
         matrix[x][y] = 1;
-        nodesPosition[i] = make_tuple(x,y);
-        chosensofar.push_back(i);
-        nodesList.push_back(make_tuple(x,y));
+        nodesPosition[i] = { x, y };
+        chosensofar.emplace_back(i);
+        nodesList.emplace_back(x,y);
     }
     
     // Genero aristas de un camino simple entre todos los nodos
@@ -67,7 +67,7 @@ void euclideanGraphs(const int &v, const int &e) {
         x_dist = get<0>(nodesPosition[i]) - get<0>(nodesPosition[i + 1]);
         y_dist = get<1>(nodesPosition[i]) - get<1>(nodesPosition[i + 1]);
         ws_dist = sqrt(pow(x_dist,2) + pow(y_dist,2));
-        edgeList.push_back(make_tuple(i, i + 1, ws_dist));
+        edgeList.emplace_back(i, i + 1, ws_dist);
     }
     
     // Todas las posibles combinaciones de aristas entre nodos
@@ -75,7 +75,7 @@ void euclideanGraphs(const int &v, const int &e) {
     for (int i = 0; i < v; i ++) {
         for (int j = i + 1; j < v; j++) {
             if (i + 1 != j) {
-                possibleEdge.push_back(make_tuple(i,j));
+                possibleEdge.emplace_back(i,j);
             }
        }
     }
@@ -91,7 +91,7 @@ void euclideanGraphs(const int &v, const int &e) {
         ws_dist = sqrt(pow(x_dist,2) + pow(y_dist,2));
         if (ws_dist <= 60) {
             actualEdges++;
-            edgeList.push_back(make_tuple(w, s, ws_dist));
+            edgeList.emplace_back(w, s, ws_dist);
         }
         possibleEdge.erase(possibleEdge.begin() + index);
     }

@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
         for (size_t i = 0; i < edges; i++) {
             int edgeA, edgeB, weight;
             cin >> edgeA >> edgeB >> weight;
-            edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+            edgeList.emplace_back(edgeA, edgeB, weight);
         }
     }
 
@@ -114,7 +114,7 @@ incidences getGraphFromFile(string filename, int edges) {
     for (size_t i = 0; i < edges; i++) {
         int edgeA, edgeB, weight;
         ifs >> edgeA >> edgeB >> weight;
-        edgeList.push_back(make_tuple(edgeA, edgeB, weight));
+        edgeList.emplace_back(edgeA, edgeB, weight);
     }
 
     ifs.close();
@@ -131,8 +131,8 @@ adjacencies incidencesToAdjacencies(incidences incidences, int v, int e) {
 
     for (int h = 0; h < e; h++) {
         edge edge = incidences[h];
-        adjacencies[get < 0 > (edge)].push_back(make_tuple(get < 1 > (edge), get < 2 > (edge)));
-        adjacencies[get < 1 > (edge)].push_back(make_tuple(get < 0 > (edge), get < 2 > (edge)));
+        adjacencies[get < 0 > (edge)].emplace_back(get < 1 > (edge), get < 2 > (edge));
+        adjacencies[get < 1 > (edge)].emplace_back(get < 0 > (edge), get < 2 > (edge));
     }
 
     return adjacencies;
@@ -203,11 +203,11 @@ vector < string > hiperconectados(incidences edgeList, int nodes, int edges) {
 
         //Compara el valor del AGM original con los obtenidos
         if (excludingEdgeCost > formerAGMCost) {
-            solucion.push_back("toda");
+            solucion.emplace_back("toda");
         } else if (includingEdgeCost > formerAGMCost - edgeCost) {
-            solucion.push_back("ninguna");
+            solucion.emplace_back("ninguna");
         } else {
-            solucion.push_back("alguna");
+            solucion.emplace_back("alguna");
         }
 
         //Le devuelve el valor original al eje
