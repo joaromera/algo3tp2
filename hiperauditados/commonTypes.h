@@ -5,7 +5,7 @@
 #include <tuple>
 #include <vector>
 
-const int INF = std::numeric_limits<int>::max();
+constexpr int INF = std::numeric_limits<int>::max();
 
 //Incidences List
 using edge = std::tuple<int, int, int>;
