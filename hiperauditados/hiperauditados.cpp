@@ -1,5 +1,6 @@
+#include <chrono>
 #include <fstream>
-#include <stdlib.h>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -12,7 +13,8 @@
 #include "dijkstrapq.h"
 #include "floydwarshall.h"
 
-enum Methods {
+enum class Methods
+{
     DijkstraOld,
     Dijkstra,
     DijkstraPQ,
@@ -22,7 +24,7 @@ enum Methods {
     Dantzig
 };
 
-Methods method = DijkstraPQ;
+Methods method = Methods::DijkstraPQ;
 
 int laps = 1;
 
@@ -101,33 +103,35 @@ int main(int argc, char *argv[])
 
     if (argc > 2)
     {
-        if (std::string(argv[2]) == "DO")
+        const std::string input_method = argv[2];
+
+        if (input_method == "DO")
         {
-            method = DijkstraOld;
+            method = Methods::DijkstraOld;
         }
-        else if (std::string(argv[2]) == "D")
+        else if (input_method == "D")
         {
-            method = Dijkstra;
+            method = Methods::Dijkstra;
         }
-        else if (std::string(argv[2]) == "DPQ")
+        else if (input_method == "DPQ")
         {
-            method = DijkstraPQ;
+            method = Methods::DijkstraPQ;
         }
-        else if (std::string(argv[2]) == "A")
+        else if (input_method == "A")
         {
-            method = AStar;
+            method = Methods::AStar;
         }
-        else if (std::string(argv[2]) == "BF")
+        else if (input_method == "BF")
         {
-            method = BellmanFord;
+            method = Methods::BellmanFord;
         }
-        else if (std::string(argv[2]) == "FW")
+        else if (input_method == "FW")
         {
-            method = FloydWarshall;
+            method = Methods::FloydWarshall;
         }
-        else if (std::string(argv[2]) == "DZ")
+        else if (input_method == "DZ")
         {
-            method = Dantzig;
+            method = Methods::Dantzig;
         }
     }
 
@@ -136,25 +140,25 @@ int main(int argc, char *argv[])
         laps = atoi(argv[3]);
         switch (method)
         {
-        case DijkstraOld:
+        case Methods::DijkstraOld:
             fileName = "dijkstraold_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
-        case Dijkstra:
+        case Methods::Dijkstra:
             fileName = "dijkstra_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
-        case DijkstraPQ:
+        case Methods::DijkstraPQ:
             fileName = "dijkstrapq_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
-        case AStar:
+        case Methods::AStar:
             fileName = "astar_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
-        case BellmanFord:
+        case Methods::BellmanFord:
             fileName = "bellmanford_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
-        case FloydWarshall:
+        case Methods::FloydWarshall:
             fileName = "floydwarshall_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
-        case Dantzig:
+        case Methods::Dantzig:
             fileName = "dantzig_" + std::to_string(nodes) + "v_" + std::to_string(edges) + "e.csv";
             break;
         }
@@ -162,6 +166,7 @@ int main(int argc, char *argv[])
         std::chrono::duration<double, std::milli> average = (std::chrono::duration<double, std::milli>)0;
         std::ofstream results;
         results.open(fileName, std::fstream::out);
+
         for (int i = 1; i <= laps; i++)
         {
             auto start = std::chrono::steady_clock::now();
@@ -173,47 +178,45 @@ int main(int argc, char *argv[])
 
         switch (method)
         {
-        case DijkstraOld:
-            results << "Dijkstra Old"
-                    << ";";
+        case Methods::DijkstraOld:
+            results << "Dijkstra Old" << ";";
             break;
-        case Dijkstra:
-            results << "Dijkstra"
-                    << ";";
+        case Methods::Dijkstra:
+            results << "Dijkstra" << ";";
             break;
-        case DijkstraPQ:
-            results << "DijkstraPQ"
-                    << ";";
+        case Methods::DijkstraPQ:
+            results << "DijkstraPQ" << ";";
             break;
-        case AStar:
-            results << "AStar"
-                    << ";";
+        case Methods::AStar:
+            results << "AStar" << ";";
             break;
-        case BellmanFord:
-            results << "BellmanFord"
-                    << ";";
+        case Methods::BellmanFord:
+            results << "BellmanFord" << ";";
             break;
-        case FloydWarshall:
-            results << "FloydWarshall"
-                    << ";";
+        case Methods::FloydWarshall:
+            results << "FloydWarshall" << ";";
             break;
-        case Dantzig:
-            results << "Dantzig"
-                    << ";";
+        case Methods::Dantzig:
+            results << "Dantzig" << ";";
             break;
         }
 
-        results << nodes << ";";
-        results << edges << ";";
-        results << std::chrono::duration<double, std::milli>(average / laps).count() << std::endl;
+        results << nodes << ";"
+                << edges << ";"
+                << std::chrono::duration<double, std::milli>(average / laps).count()
+                << std::endl;
         results.close();
     }
     else
     {
         std::vector<edge> results = hiperauditados(litrebycity, edgeList, states, nodes, edges);
+
         for (size_t i = 0; i < results.size(); i++)
         {
-            std::cout << std::get<0>(results[i]) << " " << std::get<1>(results[i]) << " " << std::get<2>(results[i]) << std::endl;
+            std::cout << std::get<0>(results[i]) << " "
+                      << std::get<1>(results[i]) << " "
+                      << std::get<2>(results[i])
+                      << std::endl;
         }
     }
     return 0;
@@ -226,15 +229,11 @@ std::vector<edge> hiperauditados(
     const int &nodes,
     const int &)
 {
-    // Crear grafo de estados a partir del original
-    incidences stateGraph = graphToStateGraph(litrebycity, edgeList, states);//O(e)
+    incidences stateGraph = graphToStateGraph(litrebycity, edgeList, states);
 
-    // Calculo cantidad de nodos y ejes para los nuevos estados
-    int nodesWithStates = nodes * states;
-    int edgesWithStates = stateGraph.size();
-
-    // Punto de partida con tanque lleno
-    int from = states - 1;
+    const int nodesWithStates = nodes * states;
+    const int edgesWithStates = stateGraph.size();
+    const int from = states - 1;
 
     std::vector<edge> results;
     std::vector<std::vector<int>> matrix;
@@ -243,14 +242,14 @@ std::vector<edge> hiperauditados(
 
     switch (method)
     {
-    case DijkstraOld:
+    case Methods::DijkstraOld:
         for (int i = from; i < nodesWithStates - 1; i += states)
         {
             distances = dijkstraOld(stateGraph, nodesWithStates, i);
             printSolution(distances, i, nodesWithStates, states, results);
         }
         break;
-    case Dijkstra:
+    case Methods::Dijkstra:
         adjList = incToAdj(stateGraph, nodesWithStates, edgesWithStates);
         for (int i = from; i < nodesWithStates - 1; i += states)
         {
@@ -258,7 +257,7 @@ std::vector<edge> hiperauditados(
             printSolution(distances, i, nodesWithStates, states, results);
         }
         break;
-    case DijkstraPQ:
+    case Methods::DijkstraPQ:
         adjList = incToAdj(stateGraph, nodesWithStates, edgesWithStates);
         for (int i = from; i < nodesWithStates - 1; i += states)
         {
@@ -266,7 +265,7 @@ std::vector<edge> hiperauditados(
             printSolution(distances, i, nodesWithStates, states, results);
         }
         break;
-    case AStar:
+    case Methods::AStar:
         adjList = incToAdj(stateGraph, nodesWithStates, edgesWithStates);
         for (int i = from; i < nodesWithStates - 1; i += states)
         {
@@ -274,18 +273,18 @@ std::vector<edge> hiperauditados(
             printSolution(distances, i, nodesWithStates, states, results);
         }
         break;
-    case BellmanFord:
+    case Methods::BellmanFord:
         for (int i = from; i < nodesWithStates - 1; i += states)
         {
             distances = bellmanford(stateGraph, nodesWithStates, i);
             printSolution(distances, i, nodesWithStates, states, results);
         }
         break;
-    case FloydWarshall:
+    case Methods::FloydWarshall:
         matrix = floydwarshall(stateGraph, nodesWithStates);
         results = printSolution(matrix, from, nodesWithStates, states);
         break;
-    case Dantzig:
+    case Methods::Dantzig:
         matrix = dantzig(stateGraph, nodesWithStates);
         results = printSolution(matrix, from, nodesWithStates, states);
         break;
@@ -319,7 +318,6 @@ void getProblemFromFile(
     std::vector<int> &litrebycity,
     incidences &edgeList)
 {
-
     std::ifstream ifs(fileName);
     ifs >> nodes >> edges;
     litrebycity.reserve(nodes);
@@ -347,7 +345,6 @@ incidences graphToStateGraph(
     const incidences &edgeList,
     const int &states)
 {
-
     incidences stateGraph;
 
     for (size_t i = 1; i < states; i++)
@@ -378,7 +375,6 @@ std::vector<edge> printSolution(
     const int &nodesWithStates,
     const int &states)
 {
-
     std::vector<edge> results;
 
     for (size_t i = from; i < nodesWithStates - 1; i += states)
@@ -407,7 +403,6 @@ void printSolution(
     const int &states,
     std::vector<edge> &results)
 {
-
     for (int j = from + states; j < nodesWithStates; j += states)
     {
         int min = *min_element(distances.begin() + j - states, distances.begin() + j);
@@ -423,12 +418,11 @@ adjacencies incToAdj(const incidences &edgeList, const int &v, const int &e)
     adjacents nodeAdjacents;
     nodeAdjacents.reserve(v);
 
-    // Armo lista de adyacencias
     for (int i = 0; i < v; i++)
     {
         adjList.push_back(nodeAdjacents);
     }
-    // Agrego los adyacentes y los pesos a cada nodo
+
     for (int h = 0; h < e; h++)
     {
         edge e = edgeList[h];
