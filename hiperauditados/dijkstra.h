@@ -8,7 +8,7 @@ std::vector<int> dijkstra(const adjacencies &adjList, const int nodes, const int
     std::vector<bool> visited(nodes, false);
     visited[from] = true;
 
-    // Actualizo las distancias desde el nodo de partida hasta sus vecinos
+    // Update distanes from source node to its neighbors
     std::vector<int> solution(nodes, INF);
     for (const auto &adj : adjList[from])
     {
@@ -18,12 +18,11 @@ std::vector<int> dijkstra(const adjacencies &adjList, const int nodes, const int
 
     std::vector<int> solution_tmp = solution;
 
-    // Mientras no haya chequeado todos los nodos
     for (int checked_nodes = 1; checked_nodes != nodes; )
     {
         std::tuple<int, int> minNode = { from, INF };
 
-        // Busco el nodo con mínima distancia que aun no haya sido visitado
+        // Find unvisited node with minimum distance
         for (size_t i = 0; i < nodes; ++i)
         {
             const int minNodeW = std::get<1>(minNode);

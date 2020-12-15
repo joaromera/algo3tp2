@@ -4,7 +4,7 @@ STDFLAGS = -std=c++17 -Wall -Wextra -pedantic -O3 -Ofast
 
 RM=rm -f
 
-BINARIES = generator euclideangraphs hiperauditados astarvsdpq
+BINARIES = generator euclideangraphs hiperauditados
 
 all: $(BINARIES)
 
@@ -16,9 +16,6 @@ euclideangraphs: euclideangraphs.o
 
 hiperauditados: hiperauditados.o
 	$(CXX) $(STDFLAGS) $^ -o hiperauditados
-
-astarvsdpq: astarvsdpq.o
-	$(CXX) $(STDFLAGS) $^ -o astarvsdpq
 
 %.o: %.cpp
 	$(CXX) $(STDFLAGS) -c $<

@@ -6,16 +6,14 @@
 /** generator(int v, int e, int seed, int problem)
  *  v <-- #nodes
  *  e <-- #edges
- *  seed <-- para no generar siempre el mismo grafo 
+ *  seed <-- for some randomness
  *  problem <-- default: 1 hiperconectados, 2 hiperauditados
  * 
- *  el grafo es un std::vector de e x v tal que
- *  e[i][0] es uno de los vertices que conecta el eje i
- *  e[i][1] es el otro vertice que conecta el eje i
- * 	e[i][2] es el peso del eje
+ *  the graph is a vector of e x and v such that
+ *  e[i][0] one node that connects edge i
+ *  e[i][1] the other node that connects edge i
+ * 	e[i][2] edge's weight
  * 
- * Para el probema 2 elige el costo de la nafta desde 1 a v y las distancias entre 30 y 60.
- * 	
  **/
 void saveGraphToFile(const int &v, const int &e, const std::vector<std::vector<int>> &edge, const int &problem)
 {
@@ -65,7 +63,6 @@ void generateRandGraphs(const int &v, const int &e, const int &problem)
     std::vector<std::vector<int>> edge(e, std::vector<int>(3));
     int i = 0;
 
-    // Genero el grafo conexo de v nodos y v-1 ejes
     std::vector<int> n(v, 0);
     for (int k = 0; k < n.size(); ++k)
     {
@@ -97,7 +94,7 @@ void generateRandGraphs(const int &v, const int &e, const int &problem)
         ++i;
     }
 
-    // Completa el grafo con los ejes que faltan
+    // Complete missing edges with randome edges
     while (i < e)
     {
         edge[i][0] = rand() % v;

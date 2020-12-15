@@ -46,9 +46,10 @@ void euclideanGraphs(const int &v, const int &e)
     chosensofar.emplace_back(0);
     nodesList.emplace_back(0, 0);
 
-    // Asigno nodos a posiciones y las guardo
+    // Assign nodes
     int w, s, x_dist, y_dist, ws_dist;
     int direction[2] = { -1, 1 };
+
     for (int i = 1; i < v; ++i)
     {
         do
@@ -61,13 +62,14 @@ void euclideanGraphs(const int &v, const int &e)
             y_dist = y - std::get<1>(nodesPosition[i - 1]);
             ws_dist = std::sqrt(std::pow(x_dist, 2) + std::pow(y_dist, 2));
         } while (x >= 42 || x < 0 || y < 0 || y >= 42 || ws_dist > 60 || matrix[x][y] != 0);
+
         matrix[x][y] = 1;
         nodesPosition[i] = { x, y };
         chosensofar.emplace_back(i);
         nodesList.emplace_back(x, y);
     }
 
-    // Genero aristas de un camino simple entre todos los nodos
+    // Generate edges for a single path between all nodes
     for (int i = 0; i < v - 1; ++i)
     {
         x_dist = std::get<0>(nodesPosition[i]) - std::get<0>(nodesPosition[i + 1]);
@@ -76,7 +78,7 @@ void euclideanGraphs(const int &v, const int &e)
         edgeList.emplace_back(i, i + 1, ws_dist);
     }
 
-    // Todas las posibles combinaciones de aristas entre nodos
+    // Every possible combination of edges between nodes
     std::vector<std::tuple<int, int>> possibleEdge;
     for (int i = 0; i < v; ++i)
     {
@@ -89,7 +91,7 @@ void euclideanGraphs(const int &v, const int &e)
         }
     }
 
-    // Elegi al azar aristas entre las posibles
+    // Pick random edges among possible
     int actualEdges = v - 1;
     for (int i = 0; i < e - v + 1; ++i)
     {

@@ -24,9 +24,7 @@ std::vector<int> astar(const adjacencies &adjList, const int nodes, const int fr
 
             if (solution[std::get<0>(adj)] == INF || (new_cost < solution[std::get<0>(adj)]))
             {
-                //usamos new_cost ya que para este tipo de entradas no disponemos
-                //de la información necesaria para la heurística
-                //o sea, es igual a Dijkstra PQ.
+                // Use new_cost, as Dijkstra Priority Queue
                 solution[std::get<0>(adj)] = new_cost;
                 const int priority = new_cost;
                 queue.emplace(std::get<0>(adj), new_cost, priority);

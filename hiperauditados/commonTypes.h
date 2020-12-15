@@ -1,11 +1,7 @@
 #pragma once
 
-#include <algorithm>
-#include <chrono>
-#include <iostream>
 #include <limits>
 #include <queue>
-#include <set>
 #include <tuple>
 #include <vector>
 
@@ -59,3 +55,11 @@ public:
 using priorityQueue    = std::priority_queue<edge, std::vector<edge>, heavierThan>;
 using priority_Queue   = std::priority_queue<std::tuple<int, int>, std::vector<std::tuple<int, int>>, heavier_Than>;
 using priority_Queue_A = std::priority_queue<std::tuple<int, int, int>, std::vector<std::tuple<int, int, int>>, heavier_Than_A>;
+
+void relax(std::vector<std::vector<int>> &dists, int from, int middle, int to)
+{
+    if (dists[from][to] > dists[from][middle] + dists[middle][to])
+    {
+        dists[from][to] = dists[from][middle] + dists[middle][to];
+    }
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include "commonTypes.h"
 
 //O(v^2 * e)
@@ -8,7 +9,7 @@ std::vector<int> dijkstraOld(const incidences &edgeList, const int nodes, const 
     std::vector<int> visited(nodes, -1);
     visited[from] = 0;
 
-    // Actualizo las distancias desde el nodo de partida hasta sus vecinos
+    // Update distanes from source node to its neighbors
     std::vector<int> solution(nodes, INF);
     for (const auto &e : edgeList)
     {
@@ -21,20 +22,17 @@ std::vector<int> dijkstraOld(const incidences &edgeList, const int nodes, const 
 
     std::vector<int> solution_tmp = solution;
 
-    // Mientras no hay chequeado todos los nodos
     for (int checked_nodes = 1; checked_nodes != nodes; )
     {
         auto w = std::min_element(solution_tmp.begin(), solution_tmp.end());
 
-        // Si ya lo visité le cambió el valor para buscar otro mínimo
+        // If already visited change its value and look for other minimum
         if (visited[w - solution_tmp.begin()] == 0)
         {
             *w = INF;
         }
         else
         {
-            // Lo marco como visitado, aumento la cantidad de nodos chequeados
-            // y relajo distancias de sus vecinos
             visited[w - solution_tmp.begin()] = 0;
             ++checked_nodes;
             for (size_t i = 0; i < nodes; ++i)
