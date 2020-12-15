@@ -1,11 +1,7 @@
 #pragma once
 
-#include <algorithm>
-#include <chrono>
-#include <iostream>
 #include <limits>
 #include <queue>
-#include <set>
 #include <tuple>
 #include <vector>
 
@@ -43,6 +39,15 @@ public:
     bool operator()(const std::tuple<int, int, int> &a, const std::tuple<int, int, int> &b) const
     {
         return (std::get<2>(a) > std::get<2>(b));
+    }
+};
+
+class smallerThan
+{
+public:
+    bool operator()(const edge & a, const edge & b) const
+    {
+        return (std::get < 2 > (a) < std::get < 2 > (b));
     }
 };
 
