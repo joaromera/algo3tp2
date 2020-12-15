@@ -15,7 +15,7 @@
  * 	e[i][2] edge's weight
  * 
  **/
-void saveGraphToFile(const int &v, const int &e, const std::vector<std::vector<int>> &edge, const int &problem)
+void saveGraphToFile(const size_t &v, const size_t &e, const std::vector<std::vector<int>> &edge, const int &problem)
 {
     const std::string fileName = std::to_string(v) + "v_" + std::to_string(e) + "e_" + std::to_string(problem) + ".txt";
     std::fstream f;
@@ -26,7 +26,7 @@ void saveGraphToFile(const int &v, const int &e, const std::vector<std::vector<i
     {
         for (size_t i = 0; i < v; ++i)
         {
-            const int litreCostInCity_i = (rand() % v) + 1;
+            const size_t litreCostInCity_i = (rand() % v) + 1;
             f << litreCostInCity_i << std::endl;
         }
     }
@@ -58,13 +58,13 @@ void printGraph(const int &v, const int &e, const std::vector<std::vector<int>> 
     }
 }
 
-void generateRandGraphs(const int &v, const int &e, const int &problem)
+void generateRandGraphs(const size_t &v, const size_t &e, const size_t &problem)
 {
     std::vector<std::vector<int>> edge(e, std::vector<int>(3));
-    int i = 0;
+    size_t i = 0;
 
     std::vector<int> n(v, 0);
-    for (int k = 0; k < n.size(); ++k)
+    for (size_t k = 0; k < n.size(); ++k)
     {
         n[k] = k;
     }
@@ -113,7 +113,7 @@ void generateRandGraphs(const int &v, const int &e, const int &problem)
             continue;
         else
         {
-            for (int j = 0; j < i; ++j)
+            for (size_t j = 0; j < i; ++j)
             {
                 if ((edge[i][0] == edge[j][0] && edge[i][1] == edge[j][1]) || (edge[i][0] == edge[j][1] && edge[i][1] == edge[j][0]))
                 {

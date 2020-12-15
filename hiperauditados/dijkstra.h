@@ -23,7 +23,7 @@ std::vector<int> dijkstra(const adjacencies &adjList, const int nodes, const int
         std::tuple<int, int> minNode = { from, INF };
 
         // Find unvisited node with minimum distance
-        for (size_t i = 0; i < nodes; ++i)
+        for (int i = 0; i < nodes; ++i)
         {
             const int minNodeW = std::get<1>(minNode);
             if (!visited[i] && minNodeW >= solution[i])

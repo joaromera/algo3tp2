@@ -86,14 +86,14 @@ int main(int argc, char *argv[])
     else
     {
         std::cin >> nodes >> edges;
-        for (size_t i = 0; i < nodes; i++)
+        for (int i = 0; i < nodes; i++)
         {
             int litrecost;
             std::cin >> litrecost;
             litrebycity.emplace_back(litrecost);
         }
 
-        for (size_t i = 0; i < edges; i++)
+        for (int i = 0; i < edges; i++)
         {
             int edgeA, edgeB, weight;
             std::cin >> edgeA >> edgeB >> weight;
@@ -300,7 +300,7 @@ incidences getGraphFromFile(const std::string &fileName, const int &edges)
     std::string skip;
     std::getline(ifs, skip);
 
-    for (size_t i = 0; i < edges; i++)
+    for (int i = 0; i < edges; i++)
     {
         int edgeA, edgeB, weight;
         ifs >> edgeA >> edgeB >> weight;
@@ -323,14 +323,14 @@ void getProblemFromFile(
     litrebycity.reserve(nodes);
     edgeList.reserve(edges);
 
-    for (size_t i = 0; i < nodes; i++)
+    for (int i = 0; i < nodes; i++)
     {
         int cost_in_city_i;
         ifs >> cost_in_city_i;
         litrebycity.emplace_back(cost_in_city_i);
     }
 
-    for (size_t i = 0; i < edges; i++)
+    for (int i = 0; i < edges; i++)
     {
         int edgeA, edgeB, weight;
         ifs >> edgeA >> edgeB >> weight;
@@ -347,7 +347,7 @@ incidences graphToStateGraph(
 {
     incidences stateGraph;
 
-    for (size_t i = 1; i < states; i++)
+    for (int i = 1; i < states; i++)
     {
         int j = i - 1;
         for (size_t k = 0; k < litrebycity.size(); k++)
@@ -377,12 +377,12 @@ std::vector<edge> printSolution(
 {
     std::vector<edge> results;
 
-    for (size_t i = from; i < nodesWithStates - 1; i += states)
+    for (int i = from; i < nodesWithStates - 1; i += states)
     {
         for (int j = i + states; j < nodesWithStates; j += states)
         {
             int min = INF;
-            for (size_t k = j - states; k < j; k++)
+            for (int k = j - states; k < j; k++)
             {
                 if (matrix[i][k] < min)
                 {

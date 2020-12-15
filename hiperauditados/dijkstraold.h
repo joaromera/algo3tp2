@@ -35,7 +35,7 @@ std::vector<int> dijkstraOld(const incidences &edgeList, const int nodes, const 
         {
             visited[w - solution_tmp.begin()] = 0;
             ++checked_nodes;
-            for (size_t i = 0; i < nodes; ++i)
+            for (int i = 0; i < nodes; ++i)
             {
                 if (visited[i] == -1)
                 {

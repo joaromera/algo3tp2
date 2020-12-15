@@ -12,7 +12,7 @@ std::vector<std::vector<int>> floydwarshall(const incidences &edgeList, const in
         distances[std::get<0>(e)][std::get<1>(e)] = std::get<2>(e);
     }
 
-    for (size_t i = 0; i < nodes; ++i)
+    for (int i = 0; i < nodes; ++i)
     {
         distances[i][i] = 0;
     }

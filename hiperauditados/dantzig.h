@@ -14,7 +14,7 @@ std::vector<std::vector<int>> dantzig(const incidences &edgeList, const int node
     }
 
     // Zero out distances where srt and dst match
-    for (size_t i = 0; i < nodes; ++i)
+    for (int i = 0; i < nodes; ++i)
     {
         distances[i][i] = 0;
     }

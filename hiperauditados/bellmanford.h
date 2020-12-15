@@ -8,7 +8,7 @@ std::vector<int> bellmanford(const incidences &edgeList, const int nodes, const 
     std::vector<int> solution(nodes, INF);
     solution[from] = 0;
 
-    for (size_t v = 0; v < nodes; ++v)
+    for (int v = 0; v < nodes; ++v)
     {
         for (const auto &e : edgeList)
         {
