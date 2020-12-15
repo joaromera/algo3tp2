@@ -1,5 +1,25 @@
 _DISCLAIMER_: this project is several years old. It was made with little knowledge of C++ and its best & common practices. Recent updates are made as an exercise of code reviewing my past self, just for fun.
 
+# Introduction
+
+This project was done in the context of the subject Algorithms and Data Structures 3. Its goal was to implement algorithms to solve the problem of finding _minimum spanning trees_ and _shortest paths_. Algorithms implemented include: A*, Bellman-Ford, Dantzig, Dijkstra, Floyd-Wahrshall, Kruskal and Prim. As stated above the goal of this course was not to teach C++ and programming so the knowledge of it at the time was rather... low (?).
+
+## Documents
+
+The original problem set is [here](docs/Enunciado.pdf) (spanish only).
+
+The final report is [here](docs/Informe.pdf) (spanish only).
+
+Several benchmarks and experiments are stored [here](experiments/).
+
+## How to run
+
+There are two problems: ```Hiperconectados``` (MST) and ``Hiperauditados`` (Shortest Path). The file ```generator.cpp``` generates text files with graphs that can be used as the input for each of those problems executables.
+
+On each folder you'll find a ``Makefile``.
+
+More information below (in spanish)...
+
 # Trabajo Práctico #2 - Algoritmos y Estructuras de Datos III
 
 ## Yéndose por las ramas
