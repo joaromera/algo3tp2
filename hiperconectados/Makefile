@@ -4,12 +4,9 @@ STDFLAGS = -std=c++11 -O3 -Ofast
 
 RM=rm -f
 
-BINARIES = generator hiperconectados  
+BINARIES = hiperconectados  
 
 all: $(BINARIES)
-
-generator: generator.o
-	$(CXX) $(STDFLAGS) $^ -o generator
 
 hiperconectados: hiperconectados.o prim.o kruskal.o kruskalpc.o
 	$(CXX) $(STDFLAGS) $^ -o hiperconectados
